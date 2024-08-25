@@ -17,9 +17,10 @@ interface postsListsProps {
     publishedData: [Post[], Timestamp | undefined, boolean];
     draftData: [Post[], Timestamp | undefined, boolean];
     archivedData: [Post[], Timestamp | undefined, boolean];
+    isAdmin: boolean;
 }
 
-export function PostsLists({ publishedData, draftData, archivedData }: postsListsProps) {
+export function PostsLists({ publishedData, draftData, archivedData, isAdmin }: postsListsProps) {
     const items = [
         {
             key: 'published',
@@ -28,7 +29,9 @@ export function PostsLists({ publishedData, draftData, archivedData }: postsList
                 initData={publishedData[0]}
                 initCursor={publishedData[1]}
                 initHasMore={publishedData[2]}
-                loadData={loadData(POST_STATUS.PUBLISHED)} />,
+                loadData={loadData(POST_STATUS.PUBLISHED)}
+                isAdmin={isAdmin}
+            />,
             icon: <FolderOpenOutlined />
         },
         {
@@ -38,7 +41,8 @@ export function PostsLists({ publishedData, draftData, archivedData }: postsList
                 initData={draftData[0]}
                 initCursor={draftData[1]}
                 initHasMore={draftData[2]}
-                loadData={loadData(POST_STATUS.DRAFT)} />,
+                loadData={loadData(POST_STATUS.DRAFT)}
+                isAdmin={isAdmin} />,
             icon: <PullRequestOutlined />
         },
         {
@@ -48,7 +52,8 @@ export function PostsLists({ publishedData, draftData, archivedData }: postsList
                 initData={archivedData[0]}
                 initCursor={archivedData[1]}
                 initHasMore={archivedData[2]}
-                loadData={loadData(POST_STATUS.ARCHIVED)} />,
+                loadData={loadData(POST_STATUS.ARCHIVED)}
+                isAdmin={isAdmin} />,
             icon: <DeploymentUnitOutlined />
         },
     ];

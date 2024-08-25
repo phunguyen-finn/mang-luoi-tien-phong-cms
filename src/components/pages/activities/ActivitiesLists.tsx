@@ -17,9 +17,10 @@ interface activitysListsProps {
     publishedData: [Activity[], Timestamp | undefined, boolean];
     draftData: [Activity[], Timestamp | undefined, boolean];
     archivedData: [Activity[], Timestamp | undefined, boolean];
+    isAdmin: boolean;
 }
 
-export function ActivitiesLists({ publishedData, draftData, archivedData }: activitysListsProps) {
+export function ActivitiesLists({ publishedData, draftData, archivedData, isAdmin }: activitysListsProps) {
     const items = [
         {
             key: 'published',
@@ -28,7 +29,8 @@ export function ActivitiesLists({ publishedData, draftData, archivedData }: acti
                 initData={publishedData[0]}
                 initCursor={publishedData[1]}
                 initHasMore={publishedData[2]}
-                loadData={loadData(ACTIVITY_STATUS.PUBLISHED)} />,
+                loadData={loadData(ACTIVITY_STATUS.PUBLISHED)}
+                isAdmin={isAdmin} />,
             icon: <FolderOpenOutlined />
         },
         {
@@ -38,7 +40,8 @@ export function ActivitiesLists({ publishedData, draftData, archivedData }: acti
                 initData={draftData[0]}
                 initCursor={draftData[1]}
                 initHasMore={draftData[2]}
-                loadData={loadData(ACTIVITY_STATUS.DRAFT)} />,
+                loadData={loadData(ACTIVITY_STATUS.DRAFT)}
+                isAdmin={isAdmin} />,
             icon: <PullRequestOutlined />
         },
         {
@@ -48,7 +51,8 @@ export function ActivitiesLists({ publishedData, draftData, archivedData }: acti
                 initData={archivedData[0]}
                 initCursor={archivedData[1]}
                 initHasMore={archivedData[2]}
-                loadData={loadData(ACTIVITY_STATUS.ARCHIVED)} />,
+                loadData={loadData(ACTIVITY_STATUS.ARCHIVED)}
+                isAdmin={isAdmin} />,
             icon: <DeploymentUnitOutlined />
         },
     ];
@@ -56,7 +60,7 @@ export function ActivitiesLists({ publishedData, draftData, archivedData }: acti
     return (
         <Layout style={{ display: 'flex', position: 'relative' }}>
             <Tabs type="card" items={items} />
-            <Link href='/activitys/create' style={{ position: 'absolute', right: 0 }}>
+            <Link href='/activities/create' style={{ position: 'absolute', right: 0 }}>
                 <Button type='primary'>Tạo hoạt động</Button>
             </Link>
         </Layout>

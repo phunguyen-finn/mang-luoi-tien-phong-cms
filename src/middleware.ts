@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
             const secret = new TextEncoder().encode(process.env.JWT_SECRET)
             const decodedToken = await jose.jwtVerify<any>(session.value, secret);
 
-            if (request.nextUrl.pathname === '/login') {
+            if (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/reset-password') {
                 return NextResponse.redirect(new URL('/', request.url));
             } else {
                 const requestHeaders = new Headers(request.headers);
@@ -28,7 +28,7 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/login', request.url));
         }
     } else {
-        if (request.nextUrl.pathname !== '/login') {
+        if (request.nextUrl.pathname !== '/login' && request.nextUrl.pathname !== '/reset-password') {
             return NextResponse.redirect(new URL('/login', request.url));
         } else return NextResponse.next();
     }

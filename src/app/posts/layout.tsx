@@ -18,7 +18,7 @@ const description = (
         Quản lý bài viết. Viết bài để chia sẻ thêm về dự án, và cập
         nhật của Mạng lưới Tiên phong. Chỉ có bài viết
         mục Công khai được hiển thị trên trang chính, bạn luôn có thể
-        thay đổi trạng thái của bài viết để lưu trữ hoặc xóa.
+        thay đổi trạng thái của bài viết sang lưu trữ để ẩn đi.
     </>
 )
 

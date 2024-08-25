@@ -53,7 +53,7 @@ export function ActivityForm({ initialData, onSubmit, categories }: { initialDat
     const addItem = (e: any) => {
         e.preventDefault();
         if (name === '') return;
-        setCategoryItems([...categoryItems, name]);
+        setCategoryItems([...categoryItems, name.toLowerCase()]);
         setName('');
         setTimeout(() => {
             inputRef.current?.focus();
@@ -135,6 +135,7 @@ export function ActivityForm({ initialData, onSubmit, categories }: { initialDat
                     label: item,
                     value: item,
                 }))}
+                rootClassName="capitalize"
             />
         </Form.Item>
         <Form.Item

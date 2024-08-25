@@ -1,5 +1,5 @@
-import PostPage from "@/components/pages/posts/PostPage";
+import ActivityPage from "@/components/pages/activities/ActivityPage";
 
 export default async function Page() {
-    return <PostPage />
+    return <ActivityPage />
 }

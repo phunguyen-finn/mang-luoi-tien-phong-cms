@@ -1,0 +1,75 @@
+'use client';
+
+import { UserOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Layout, Typography, App } from 'antd';
+import { validateMessages } from '@/constants/index';
+import AuthService from '@/services/auth.service';
+
+const layoutStyle: React.CSSProperties = {
+    width: '100vw',
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+};
+
+const contentStyle: React.CSSProperties = {
+    maxWidth: '350px',
+    padding: '20px',
+};
+
+export function ResetPasswordPage() {
+    const { message } = App.useApp();
+
+    const onFinish = (values: any) => {
+        message.loading('Gửi email...', 0);
+        AuthService.passwordReset(values.email).then(() => {
+            message.destroy();
+            message.success('Email gửi thành công!', 5);
+        }).catch((error: any) => {
+            message.destroy();
+            message.error('Gửi email thất bại: ' + error.message, 5);
+        })
+    }
+
+    return (
+        <Layout style={layoutStyle}>
+            <div>
+                <Layout.Content style={contentStyle}>
+                    <img src='/logo.svg' alt='logo'
+                        style={{ width: '300px', marginBottom: '10px' }}
+                        width={300}
+                        height={75} />
+                    <Form
+                        name='login-form'
+                        initialValues={{ remember: false }}
+                        onFinish={onFinish}
+                        colon={false}
+                        validateMessages={validateMessages}
+                    >
+                        <Form.Item
+                            name='email'
+                            labelAlign='left'
+                            rules={[{ required: true, type: 'email' }]}
+                        >
+                            <Input prefix={<UserOutlined />} placeholder="Your account email" />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type='primary' htmlType='submit' style={{ marginBottom: "0px", width: '300px' }}>
+                                Gửi email khôi phục mật khẩu
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Layout.Content>
+                <Layout.Footer style={{ textAlign: 'center' }}>
+                    <Typography.Text type='secondary'>Mạng lưới Tiên phong Vietnam © 2024</Typography.Text>
+                </Layout.Footer>
+            </div>
+        </Layout>
+    );
+}
+
+export default ResetPasswordPage;

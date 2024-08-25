@@ -1,6 +1,6 @@
 import Header from "@/components/common/Header";
 import NavigationMenu from "@/components/common/NavigationMenu";
-import { EditOutlined } from '@ant-design/icons';
+import { NodeExpandOutlined } from '@ant-design/icons';
 import Layout, { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import { headers } from "next/headers";
@@ -15,10 +15,9 @@ const layoutStyle: any = {
 
 const description = (
     <>
-        Quản lý bài viết. Viết bài để chia sẻ thêm về dự án, và cập
-        nhật của Mạng lưới Tiên phong. Chỉ có bài viết
+        Viết về hoạt động của Mạng lưới Tiên phong. Chỉ có bài viết
         mục Công khai được hiển thị trên trang chính, bạn luôn có thể
-        thay đổi trạng thái của bài viết để lưu trữ hoặc xóa.
+        thay đổi trạng thái của bài viết sang lưu trữ để ẩn đi.
     </>
 )
 
@@ -31,7 +30,7 @@ export default function CoreLayout({ children }: Readonly<{ children: React.Reac
         </Sider>
         <Content style={{ overflowY: 'auto', height: '100vh', width: "100%" }}>
             <Layout style={layoutStyle}>
-                <Header icon={<EditOutlined />} title="Kho Bài Viết" description={description} />
+                <Header icon={<NodeExpandOutlined />} title="Hoạt động" description={description} />
                 {children}
             </Layout>
         </Content>

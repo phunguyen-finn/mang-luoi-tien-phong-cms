@@ -13,7 +13,8 @@ const layoutStyle = {
     justifyContent: "center",
     display: "flex",
     alignItems: "center",
-    marginBottom: '10px'
+    marginBottom: '10px',
+    width: '800px',
 }
 
 export function ActivityPage({ activity }: { activity?: Activity }) {
@@ -26,7 +27,7 @@ export function ActivityPage({ activity }: { activity?: Activity }) {
             ActivityService.updateActivity(activity.id, _activity).then(() => {
                 message.destroy();
                 message.success('Cập nhật hoạt động thành công!', 5);
-                router.replace('/activities');
+                router.push('/activities');
             }).catch((error) => {
                 message.destroy();
                 message.error('Cập nhật hoạt động thất bại: ' + error.message, 5);
@@ -39,7 +40,7 @@ export function ActivityPage({ activity }: { activity?: Activity }) {
         ActivityService.createActivity(activity).then(() => {
             message.destroy();
             message.success('Tạo hoạt động thành công!', 5);
-            router.replace('/activities');
+            router.push('/activities');
         }).catch((error) => {
             message.destroy();
             message.error('Tạo hoạt động thất bại ' + error.message, 5);
@@ -48,8 +49,8 @@ export function ActivityPage({ activity }: { activity?: Activity }) {
 
     return (
         <Layout style={layoutStyle}>
-            <Layout>
-                <Breadcrumb style={{ marginBottom: 10 }}>
+            <Layout style={{ flexDirection: "column", alignItems: "flex-start", width: "100%" }}>
+                <Breadcrumb style={{ marginBottom: 10 }} rootClassName="w-full flex justify-start">
                     <Breadcrumb.Item>Trang chủ</Breadcrumb.Item>
                     <Breadcrumb.Item><Link href="/activities">Hoạt động</Link></Breadcrumb.Item>
                     <Breadcrumb.Item>{activity ? activity.title : 'Tạo hoạt động'}</Breadcrumb.Item>

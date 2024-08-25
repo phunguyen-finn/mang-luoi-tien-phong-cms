@@ -25,7 +25,7 @@ export function PostPage({ post }: { post?: Post }) {
             PostService.updatePost(post.id, _post).then(() => {
                 message.destroy();
                 message.success('Cập nhật bài viết thành công!', 5);
-                router.replace('/posts');
+                router.push('/posts');
             }).catch((error) => {
                 message.destroy();
                 message.error('Cập nhật bài viết thất bại: ' + error.message, 5);
@@ -38,7 +38,7 @@ export function PostPage({ post }: { post?: Post }) {
         PostService.createPost(post).then(() => {
             message.destroy();
             message.success('Tạo bài viết thành công!', 5);
-            router.replace('/posts');
+            router.push('/posts');
         }).catch((error) => {
             message.destroy();
             message.error('Tạo bài viết thất bại ' + error.message, 5);

@@ -1,16 +1,20 @@
 
-import PostsLists from '@/components/pages/posts/PostsLists';
-import PostService, { POST_STATUS } from '@/services/post.service';
+import ActivitiesLists from '@/components/pages/activities/ActivitiesLists';
+import ActivityService, { ACTIVITY_STATUS } from '@/services/activity.service';
+import { AUTHORITY } from '@/services/user.service';
+import { headers } from 'next/headers';
 
-export async function PostsPage() {
+export async function ActivitiesPage() {
     const [publishedData, draftData, archivedData] = await Promise.all([
-        PostService.getPostsByStatus(POST_STATUS.PUBLISHED),
-        PostService.getPostsByStatus(POST_STATUS.DRAFT),
-        PostService.getPostsByStatus(POST_STATUS.ARCHIVED),
+        ActivityService.getActivitiesByStatus(ACTIVITY_STATUS.PUBLISHED),
+        ActivityService.getActivitiesByStatus(ACTIVITY_STATUS.DRAFT),
+        ActivityService.getActivitiesByStatus(ACTIVITY_STATUS.ARCHIVED),
     ]);
+    const user = JSON.parse(headers().get('x-MLTP-Auth') as string);
+    const isAdmin = user.authority === AUTHORITY.ADMINISTRATOR;
 
 
-    return <PostsLists publishedData={publishedData} draftData={draftData} archivedData={archivedData} />
+    return <ActivitiesLists publishedData={publishedData} draftData={draftData} archivedData={archivedData} isAdmin={isAdmin} />
 }
 
-export default PostsPage;
+export default ActivitiesPage;

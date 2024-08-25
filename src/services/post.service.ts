@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, where, orderBy, query, setDoc, addDoc, startAfter, limit, Timestamp, deleteField } from "firebase/firestore/lite";
+import { collection, doc, getDoc, getDocs, where, orderBy, query, setDoc, addDoc, startAfter, limit, Timestamp, deleteField, deleteDoc } from "firebase/firestore/lite";
 import { Db } from "./firebase";
 import { Auth } from "./firebase";
 
@@ -74,6 +74,10 @@ export const PostService = {
         if (data.status === POST_STATUS.PUBLISHED) data.publishedAt = Timestamp.now();
         return addDoc(collection(Db, "post"), { ...data, createdAt: Timestamp.now(), updatedAt: Timestamp.now(), createdBy: Auth.currentUser?.email });
     },
+    deletePost: async (id: string) => {
+        await PostService.updatePost(id, { status: POST_STATUS.ARCHIVED });
+        await deleteDoc(doc(Db, "post", id));
+    }
 };
 
 export default PostService;
