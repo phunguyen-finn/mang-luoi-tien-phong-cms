@@ -25,7 +25,7 @@ const contentStyle: React.CSSProperties = {
     alignItems: 'center',
 };
 
-export function ResetPasswordPage() {
+export default function ResetPasswordPage() {
     const { message } = App.useApp();
 
     const onFinish = (values: any) => {
@@ -70,6 +70,7 @@ export function ResetPasswordPage() {
                             </Button>
                         </Form.Item>
                     </Form>
+                    <Button href='/login' type='link' style={{ marginBottom: "0px", alignSelf: 'flex-end' }}>Trở về trang đăng nhập</Button>
                 </Layout.Content>
                 <Layout.Footer style={{ textAlign: 'center' }}>
                     <Typography.Text type='secondary'>Mạng lưới Tiên phong Vietnam © 2024</Typography.Text>
@@ -78,5 +79,3 @@ export function ResetPasswordPage() {
         </Layout>
     );
 }
-
-export default ResetPasswordPage;

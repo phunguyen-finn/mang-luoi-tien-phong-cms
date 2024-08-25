@@ -4,7 +4,7 @@ import PostService, { POST_STATUS } from '@/services/post.service';
 import { AUTHORITY } from '@/services/user.service';
 import { headers } from 'next/headers';
 
-export async function PostsPage() {
+export default async function PostsPage() {
     const [publishedData, draftData, archivedData] = await Promise.all([
         PostService.getPostsByStatus(POST_STATUS.PUBLISHED),
         PostService.getPostsByStatus(POST_STATUS.DRAFT),
@@ -15,5 +15,3 @@ export async function PostsPage() {
 
     return <PostsLists publishedData={publishedData} draftData={draftData} archivedData={archivedData} isAdmin={isAdmin} />
 }
-
-export default PostsPage;

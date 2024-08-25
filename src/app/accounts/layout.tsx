@@ -18,7 +18,7 @@ const description = (
     </>
 )
 
-export function AccountLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function AccountLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const user = JSON.parse(headers().get('x-MLTP-Auth') as string);
 
     return <Layout style={{ height: '100vh', display: 'flex' }}>
@@ -34,4 +34,3 @@ export function AccountLayout({ children }: Readonly<{ children: React.ReactNode
     </Layout >;
 }
 
-export default AccountLayout;

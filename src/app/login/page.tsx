@@ -1,6 +1,6 @@
 import LoginPage from "./client";
 
-export default function Page() {
+export default async function Page() {
     return (
         <LoginPage />
     )

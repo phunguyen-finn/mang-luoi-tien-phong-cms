@@ -4,7 +4,7 @@ import ActivityService, { ACTIVITY_STATUS } from '@/services/activity.service';
 import { AUTHORITY } from '@/services/user.service';
 import { headers } from 'next/headers';
 
-export async function ActivitiesPage() {
+export default async function ActivitiesPage() {
     const [publishedData, draftData, archivedData] = await Promise.all([
         ActivityService.getActivitiesByStatus(ACTIVITY_STATUS.PUBLISHED),
         ActivityService.getActivitiesByStatus(ACTIVITY_STATUS.DRAFT),
@@ -16,5 +16,3 @@ export async function ActivitiesPage() {
 
     return <ActivitiesLists publishedData={publishedData} draftData={draftData} archivedData={archivedData} isAdmin={isAdmin} />
 }
-
-export default ActivitiesPage;

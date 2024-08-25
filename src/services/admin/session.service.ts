@@ -2,14 +2,18 @@
 
 import { cookies } from 'next/headers'
 import * as jose from 'jose'
-import { applicationDefault, initializeApp as initializeAdminApp, deleteApp } from 'firebase-admin/app';
+import { applicationDefault, initializeApp as initializeAdminApp, deleteApp, cert } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { AUTHORITY } from '../user.service';
 
 export async function createSession(idToken: string, remeber: boolean) {
+    const serviceAccount = JSON.parse(
+        process.env.GOOGLE_APPLICATION_CREDENTIALS as string
+    );
+
     const AdminFirebase = initializeAdminApp({
-        credential: applicationDefault(),
+        credential: cert(serviceAccount),
     }, "admin");
 
     try {
@@ -63,8 +67,12 @@ export async function deleteSession() {
 }
 
 export async function createAccount(email: string, password: string, displayName: string, authority: AUTHORITY, createdBy: string) {
+    const serviceAccount = JSON.parse(
+        process.env.GOOGLE_APPLICATION_CREDENTIALS as string
+    );
+
     const AdminFirebase = initializeAdminApp({
-        credential: applicationDefault(),
+        credential: cert(serviceAccount),
     }, "admin");
 
     try {
@@ -88,8 +96,12 @@ export async function createAccount(email: string, password: string, displayName
 }
 
 export async function editAccount(data: any) {
+    const serviceAccount = JSON.parse(
+        process.env.GOOGLE_APPLICATION_CREDENTIALS as string
+    );
+
     const AdminFirebase = initializeAdminApp({
-        credential: applicationDefault(),
+        credential: cert(serviceAccount),
     }, "admin");
 
     try {
@@ -106,8 +118,12 @@ export async function editAccount(data: any) {
 }
 
 export async function deleteAccount(id: string) {
+    const serviceAccount = JSON.parse(
+        process.env.GOOGLE_APPLICATION_CREDENTIALS as string
+    );
+
     const AdminFirebase = initializeAdminApp({
-        credential: applicationDefault(),
+        credential: cert(serviceAccount),
     }, "admin");
 
     try {

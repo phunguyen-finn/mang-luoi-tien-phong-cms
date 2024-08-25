@@ -39,7 +39,7 @@ const rowStyle = {
     justifyContent: 'space-between',
 };
 
-export function LoginPage() {
+export default function LoginPage() {
     const { message } = App.useApp();
     const router = useRouter();
 
@@ -47,7 +47,7 @@ export function LoginPage() {
     const onFinish = async (values: any) => {
         message.loading('Đăng nhập..', 0);
         try {
-            const user = await AuthService.login(values.username, values.password, values.remember);
+            const user = await AuthService.login(values.username, values.password);
             await createSession(await user.user.getIdToken(), values.remember);
             message.destroy();
             router.replace('/');
@@ -111,5 +111,3 @@ export function LoginPage() {
         </Layout>
     );
 }
-
-export default LoginPage;

@@ -54,10 +54,11 @@ export function AccountsList({ users, isAdmin }: { users: User[], isAdmin: boole
             <List.Item
                 key={item.email}
                 actions={[
-                    <Link href={`/accounts/${item.uid}`}>
+                    <Link key={`link-${item.uid}`} href={`/accounts/${item.uid}`}>
                         <Button type="link" disabled={!isAdmin}><EditOutlined /> Chỉnh sửa</Button>
                     </Link>,
                     <Popconfirm
+                        key={`delete-${item.uid}`}
                         title="Xoá tài khoản"
                         description="Bạn chắc chứ?"
                         onConfirm={handleDelete}

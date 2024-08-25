@@ -1,9 +1,10 @@
-import { signInWithEmailAndPassword, signOut, sendPasswordResetEmail, User, setPersistence, browserSessionPersistence, browserLocalPersistence } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut, sendPasswordResetEmail, User, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { Auth } from "@/services/firebase";
 
 export const AuthService = {
-    login: async function (email: string, password: string, remember: boolean) {
-        await AuthService.setPersistence(remember);
+    login: async function (email: string, password: string) {
+        signOut(Auth);
+        await setPersistence(Auth, browserLocalPersistence)
         return signInWithEmailAndPassword(Auth, email, password);
     },
     logout: async function () {
@@ -16,12 +17,6 @@ export const AuthService = {
         return Auth.onAuthStateChanged((user) => {
             callback(user);
         });
-    },
-    setPersistence: function (persist: boolean) {
-        return setPersistence(
-            Auth,
-            persist ? browserLocalPersistence : browserSessionPersistence
-        );
     },
 }
 
