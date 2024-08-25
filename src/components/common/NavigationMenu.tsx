@@ -1,6 +1,6 @@
 'use client';
 
-import { EditOutlined, LogoutOutlined, ShopOutlined, GoogleOutlined, CodeOutlined, GithubOutlined, FolderOpenOutlined, CopyOutlined, FormatPainterOutlined, NodeExpandOutlined, CameraOutlined, UserOutlined } from "@ant-design/icons";
+import { EditOutlined, LogoutOutlined, ShopOutlined, GoogleOutlined, CodeOutlined, GithubOutlined, FolderOpenOutlined, CopyOutlined, FormatPainterOutlined, NodeExpandOutlined, CameraOutlined, UserOutlined, GlobalOutlined } from "@ant-design/icons";
 import { usePathname } from 'next/navigation';
 import Typography from "antd/es/typography/Typography";
 import Menu from "antd/es/menu";
@@ -21,7 +21,9 @@ export const MENU_ITEM_KEYS = {
     SIGNOUT: 'signout',
     GOOGLE_ANALYTICS: 'google-analytics',
     CONSOLE: 'console',
+    GITHUB_CMS: 'github_cms',
     GITHUB: 'github',
+    VISIT: 'visit',
 }
 
 const logoStyle: React.CSSProperties = {
@@ -99,19 +101,31 @@ export default function NavigationMenu({ user }: any) {
             label: 'Liên kết khác',
             children: [
                 {
-                    key: MENU_ITEM_KEYS.GOOGLE_ANALYTICS,
-                    icon: <GoogleOutlined />,
-                    label: 'Google Analytics'
+                    key: MENU_ITEM_KEYS.VISIT,
+                    icon: <GlobalOutlined />,
+                    label: <a target="_blank" href='https://mangluoitienphong.org/'>Trang công khai</a>
                 },
                 {
-                    key: MENU_ITEM_KEYS.CONSOLE,
-                    icon: <CodeOutlined />,
-                    label: 'Console'
+                    key: MENU_ITEM_KEYS.GITHUB_CMS,
+                    icon: <GithubOutlined />,
+                    label: <a target="_blank" href="https://github.com/nnphongphu/mang-luoi-tien-phong-cms">Mã nguồn CMS</a>
                 },
                 {
                     key: MENU_ITEM_KEYS.GITHUB,
                     icon: <GithubOutlined />,
-                    label: 'GitHub'
+                    label: <a target="_blank" href="https://github.com/nnphongphu/mang-luoi-tien-phong-cms">Mã nguồn</a>
+                },
+                {
+                    key: MENU_ITEM_KEYS.GOOGLE_ANALYTICS,
+                    icon: <GoogleOutlined />,
+                    label: <a target="_blank" href="https://console.firebase.google.com/u/1/project/mangluoitienphong-de378/analytics/app/web:YzNhZjQ0YmQtZjQ4Ny00ZmU5LThhYTYtMDQ0MzhmMGU1MmQw/overview/reports~2Fdashboard%3Fr%3Dfirebase-overview&fpn%3D539909504889">
+                        Google Analytics
+                    </a>
+                },
+                {
+                    key: MENU_ITEM_KEYS.CONSOLE,
+                    icon: <CodeOutlined />,
+                    label: <a target="_blank" href="https://console.firebase.google.com/u/1/project/mangluoitienphong-de378/overview">Console</a>
                 },
             ],
         }
