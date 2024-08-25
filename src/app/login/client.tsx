@@ -45,7 +45,7 @@ export default function LoginPage() {
 
 
     const onFinish = async (values: any) => {
-        message.loading('Đăng nhập..', 0);
+        message.loading('Đăng nhập...', 0);
         try {
             const user = await AuthService.login(values.username, values.password);
             await createSession(await user.user.getIdToken(), values.remember);
@@ -78,14 +78,14 @@ export default function LoginPage() {
                         <Form.Item
                             name='username'
                             labelAlign='left'
-                            rules={[{ required: true, type: 'email' }]}
+                            rules={[{ required: true, type: 'email', message: 'Email không hợp lệ' }]}
                         >
                             <Input prefix={<UserOutlined />} placeholder="Email" />
                         </Form.Item>
                         <Form.Item
                             name='password'
                             labelAlign='left'
-                            rules={[{ required: true }, { min: 8 }]}
+                            rules={[{ required: true, message: 'Mật khẩu không hợp lệ' }, { min: 8, message: 'Mật khẩu phải có ít nhất 8 kí tự' }]}
                         >
                             <Input.Password prefix={<LockOutlined />} placeholder="Mật khẩu" />
                         </Form.Item>

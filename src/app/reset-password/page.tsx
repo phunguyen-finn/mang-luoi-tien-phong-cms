@@ -60,7 +60,7 @@ export default function ResetPasswordPage() {
                         <Form.Item
                             name='email'
                             labelAlign='left'
-                            rules={[{ required: true, type: 'email' }]}
+                            rules={[{ required: true, type: 'email', message: 'Email không hợp lệ' }]}
                         >
                             <Input prefix={<UserOutlined />} placeholder="Email" />
                         </Form.Item>
