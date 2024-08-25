@@ -69,15 +69,16 @@ export async function createAccount(email: string, password: string, displayName
 
     try {
         const db = getFirestore(AdminFirebase);
+        const user = await getAuth(AdminFirebase).createUser({
+            email,
+            password,
+        });
         await db.collection('user').doc(email).set({
             createdAt: Timestamp.now(),
             createdBy,
             displayName,
             authority,
-        });
-        await getAuth(AdminFirebase).createUser({
-            email,
-            password,
+            uid: user.uid,
         });
     } catch (error: any) {
         throw new Error(error);

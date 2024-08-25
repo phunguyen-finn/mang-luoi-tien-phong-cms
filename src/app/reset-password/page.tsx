@@ -4,6 +4,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Layout, Typography, App } from 'antd';
 import { validateMessages } from '@/constants/index';
 import AuthService from '@/services/auth.service';
+import Image from 'next/image';
 
 const layoutStyle: React.CSSProperties = {
     width: '100vw',
@@ -19,6 +20,9 @@ const layoutStyle: React.CSSProperties = {
 const contentStyle: React.CSSProperties = {
     maxWidth: '350px',
     padding: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
 };
 
 export function ResetPasswordPage() {
@@ -39,10 +43,13 @@ export function ResetPasswordPage() {
         <Layout style={layoutStyle}>
             <div>
                 <Layout.Content style={contentStyle}>
-                    <img src='/logo.svg' alt='logo'
-                        style={{ width: '300px', marginBottom: '10px' }}
-                        width={300}
-                        height={75} />
+                    <Image
+                        src="/logo.png"
+                        alt="logo"
+                        className="dark:invert mb-4"
+                        width={75}
+                        height={75}
+                    />
                     <Form
                         name='login-form'
                         initialValues={{ remember: false }}
@@ -55,7 +62,7 @@ export function ResetPasswordPage() {
                             labelAlign='left'
                             rules={[{ required: true, type: 'email' }]}
                         >
-                            <Input prefix={<UserOutlined />} placeholder="Your account email" />
+                            <Input prefix={<UserOutlined />} placeholder="Email" />
                         </Form.Item>
                         <Form.Item>
                             <Button type='primary' htmlType='submit' style={{ marginBottom: "0px", width: '300px' }}>

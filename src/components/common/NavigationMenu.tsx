@@ -9,6 +9,7 @@ import AuthService from "@/services/auth.service";
 import { deleteSession } from "@/services/admin/session.service";
 import App from "antd/es/app";
 import Image from "next/image";
+import Link from "next/link";
 
 export const MENU_ITEM_KEYS = {
     STATIC: 'static',
@@ -22,68 +23,6 @@ export const MENU_ITEM_KEYS = {
     CONSOLE: 'console',
     GITHUB: 'github',
 }
-
-export const MENU_ITEMS: any = [
-    {
-        key: MENU_ITEM_KEYS.STATIC,
-        icon: <FormatPainterOutlined />,
-        label: 'Nội dung tĩnh'
-    },
-    {
-        key: MENU_ITEM_KEYS.PRODUCTS,
-        icon: <ShopOutlined />,
-        label: 'Sản phẩm',
-    },
-    {
-        key: MENU_ITEM_KEYS.POSTS,
-        icon: <EditOutlined />,
-        label: 'Bài viết',
-    },
-    {
-        key: MENU_ITEM_KEYS.ACTIVITIES,
-        icon: <NodeExpandOutlined />,
-        label: 'Hoạt động',
-    },
-    {
-        key: MENU_ITEM_KEYS.ALBUMS,
-        icon: <CameraOutlined />,
-        label: 'Hình ảnh',
-    },
-    {
-        key: MENU_ITEM_KEYS.ACCOUNTS,
-        icon: <UserOutlined />,
-        label: 'Quản lí Tài khoản',
-    },
-    {
-        key: MENU_ITEM_KEYS.SIGNOUT,
-        label: 'Đăng xuất',
-        icon: <LogoutOutlined />,
-    },
-    {
-        type: "divider",
-    },
-    {
-        type: 'group',
-        label: 'Liên kết khác',
-        children: [
-            {
-                key: MENU_ITEM_KEYS.GOOGLE_ANALYTICS,
-                icon: <GoogleOutlined />,
-                label: 'Google Analytics'
-            },
-            {
-                key: MENU_ITEM_KEYS.CONSOLE,
-                icon: <CodeOutlined />,
-                label: 'Console'
-            },
-            {
-                key: MENU_ITEM_KEYS.GITHUB,
-                icon: <GithubOutlined />,
-                label: 'GitHub'
-            },
-        ],
-    }
-];
 
 const logoStyle: React.CSSProperties = {
     display: 'flex',
@@ -109,32 +48,75 @@ export default function NavigationMenu({ user }: any) {
     const router = useRouter();
     const { message } = App.useApp();
 
-    const onClick = async ({ key }: any) => {
-        switch (key) {
-            case MENU_ITEM_KEYS.STATIC:
-                router.push('/');
-                break;
-            case MENU_ITEM_KEYS.GOOGLE_ANALYTICS:
-                window.open('https://console.firebase.google.com/u/1/project/ethnicityvn/analytics/app/web:NzQ4ZGU4YTQtY2Y3Yy00OGNhLWI0OWEtYTU1N2QyNmY5MWMx/overview/reports~2Fdashboard%3Fr%3Dfirebase-overview&fpn%3D1019016524204');
-                break;
-            case MENU_ITEM_KEYS.CONSOLE:
-                window.open('https://console.firebase.google.com/u/1/project/ethnicityvn/overview');
-                break;
-            case MENU_ITEM_KEYS.GITHUB:
-                window.open('https://github.com/nnphongphu/ethnicityviet-cms-client');
-                break;
-            case MENU_ITEM_KEYS.SIGNOUT:
+
+    const MENU_ITEMS: any = [
+        {
+            key: MENU_ITEM_KEYS.STATIC,
+            icon: <FormatPainterOutlined />,
+            label: <Link href="/">Nội dung tĩnh</Link>
+        },
+        {
+            key: MENU_ITEM_KEYS.PRODUCTS,
+            icon: <ShopOutlined />,
+            label: <Link href="/products">Sản phẩm</Link>,
+        },
+        {
+            key: MENU_ITEM_KEYS.POSTS,
+            icon: <EditOutlined />,
+            label: <Link href="/posts">Bài viết</Link>,
+        },
+        {
+            key: MENU_ITEM_KEYS.ACTIVITIES,
+            icon: <NodeExpandOutlined />,
+            label: <Link href="/activities">Hoạt động</Link>,
+        },
+        {
+            key: MENU_ITEM_KEYS.ALBUMS,
+            icon: <CameraOutlined />,
+            label: <Link href="/albums">Albums</Link>,
+        },
+        {
+            key: MENU_ITEM_KEYS.ACCOUNTS,
+            icon: <UserOutlined />,
+            label: <Link href="/accounts">Quản lý tài khoản</Link>,
+        },
+        {
+            key: MENU_ITEM_KEYS.SIGNOUT,
+            label: <div onClick={async () => {
                 message.loading('Đăng xuất..', 0);
                 await deleteSession();
                 await AuthService.logout();
                 message.destroy();
                 router.replace('/login');
-                break;
-            default:
-                router.push('/' + key);
-                break;
+            }}>Đăng xuất</div>,
+            icon: <LogoutOutlined />,
+        },
+        {
+            type: "divider",
+        },
+        {
+            type: 'group',
+            label: 'Liên kết khác',
+            children: [
+                {
+                    key: MENU_ITEM_KEYS.GOOGLE_ANALYTICS,
+                    icon: <GoogleOutlined />,
+                    label: 'Google Analytics'
+                },
+                {
+                    key: MENU_ITEM_KEYS.CONSOLE,
+                    icon: <CodeOutlined />,
+                    label: 'Console'
+                },
+                {
+                    key: MENU_ITEM_KEYS.GITHUB,
+                    icon: <GithubOutlined />,
+                    label: 'GitHub'
+                },
+            ],
         }
-    }
+    ];
+
     return <div style={{ display: 'flex', flexDirection: "column" }}>
         <div className="flex items-center">
             <Image src='/logo.png' alt='logo' style={logoStyle} width={60} height={60} />
@@ -151,7 +133,6 @@ export default function NavigationMenu({ user }: any) {
             }}
             mode="inline"
             items={MENU_ITEMS}
-            onSelect={onClick}
             selectedKeys={[pathname.split('/')[1] || 'static']}
         />
     </div>

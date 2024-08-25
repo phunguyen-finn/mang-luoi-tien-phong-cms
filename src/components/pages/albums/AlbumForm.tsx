@@ -80,6 +80,7 @@ export function AlbumForm({ initialData, onSubmit }: { initialData?: Album, onSu
                 listType="picture-card"
                 customRequest={uploadImage}
                 onPreview={handlePreview}
+                multiple
                 defaultFileList={initialData
                     ? initialData.images.map((image) => {
                         return {

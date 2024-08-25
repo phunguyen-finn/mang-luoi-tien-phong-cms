@@ -17,7 +17,7 @@ const layoutStyle = {
     width: '800px',
 }
 
-export function ActivityPage({ activity }: { activity?: Activity }) {
+export function ActivityPage({ activity, isAdmin }: { activity?: Activity, isAdmin: boolean }) {
     const router = useRouter();
     const { message } = App.useApp();
 
@@ -56,7 +56,7 @@ export function ActivityPage({ activity }: { activity?: Activity }) {
                     <Breadcrumb.Item>{activity ? activity.title : 'Tạo hoạt động'}</Breadcrumb.Item>
                 </Breadcrumb>
                 <Suspense fallback={null}>
-                    <ActivityFormWrapper initialData={activity} onSubmit={activity ? handleUpdate : handleCreate} />
+                    <ActivityFormWrapper initialData={activity} onSubmit={activity ? handleUpdate : handleCreate} isAdmin={isAdmin} />
                 </Suspense>
             </Layout>
         </Layout >

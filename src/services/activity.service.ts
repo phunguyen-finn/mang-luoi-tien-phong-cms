@@ -59,7 +59,6 @@ export const ActivityService = {
     },
     updateActivity: async (id: string, data: any) => {
         if (data.status !== ACTIVITY_STATUS.PUBLISHED) {
-            console.log("status", data);
             const activity = await getDoc(doc(Db, "activity", id));
             if (!activity.exists()) return Promise.reject(new Error("Resource not found"));
             const activitiesWithSameCategory = await getDocs(query(collection(Db, "activity"), where("category", "==", activity.data().category), where("status", "==", ACTIVITY_STATUS.PUBLISHED), limit(2)));

@@ -37,7 +37,7 @@ const uploadButton = (
     </button>
 );
 
-export function ActivityForm({ initialData, onSubmit, categories }: { initialData?: Activity, onSubmit: any, categories: string[] }) {
+export function ActivityForm({ initialData, onSubmit, categories, isAdmin }: { initialData?: Activity, onSubmit: any, categories: string[], isAdmin: boolean }) {
     const [form] = Form.useForm();
     const [content, setContent] = useState('');
     const [previewOpen, setPreviewOpen] = useState(false);
@@ -173,7 +173,7 @@ export function ActivityForm({ initialData, onSubmit, categories }: { initialDat
         </Form.Item>
         <Form.Item label="Trạng thái" name="status" rules={[{ required: true }]}>
             <Radio.Group>
-                <Radio.Button value={ACTIVITY_STATUS.PUBLISHED}>Công khai</Radio.Button>
+                <Radio.Button value={ACTIVITY_STATUS.PUBLISHED} disabled={!isAdmin}>Công khai</Radio.Button>
                 <Radio.Button value={ACTIVITY_STATUS.DRAFT}>Nháp</Radio.Button>
                 <Radio.Button value={ACTIVITY_STATUS.ARCHIVED}>Kho lưu trữ</Radio.Button>
             </Radio.Group>

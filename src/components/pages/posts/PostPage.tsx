@@ -15,7 +15,7 @@ const layoutStyle = {
     marginBottom: '10px'
 }
 
-export function PostPage({ post }: { post?: Post }) {
+export function PostPage({ post, isAdmin }: { post?: Post, isAdmin: boolean }) {
     const router = useRouter();
     const { message } = App.useApp();
 
@@ -53,7 +53,7 @@ export function PostPage({ post }: { post?: Post }) {
                     <Breadcrumb.Item><Link href="/posts">Bài viết</Link></Breadcrumb.Item>
                     <Breadcrumb.Item>{post ? post.title : 'Tạo bài viết'}</Breadcrumb.Item>
                 </Breadcrumb>
-                <PostForm initialData={post} onSubmit={post ? handleUpdate : handleCreate} />
+                <PostForm initialData={post} onSubmit={post ? handleUpdate : handleCreate} isAdmin={isAdmin} />
             </Layout>
         </Layout >
     );

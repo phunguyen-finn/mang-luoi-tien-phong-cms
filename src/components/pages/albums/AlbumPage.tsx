@@ -32,9 +32,10 @@ export function AlbumPage({ album }: { album?: Album }) {
         }
     }
 
-    const handleCreate = (pattern: any) => {
+    const handleCreate = (album: any) => {
+        console.log(album);
         message.loading('Tạo album...', 0);
-        AlbumService.createAlbum(pattern).then(() => {
+        AlbumService.createAlbum(album).then(() => {
             message.destroy();
             message.success('Tạo album thành công', 5);
             router.push("/albums");

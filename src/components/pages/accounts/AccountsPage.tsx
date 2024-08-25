@@ -1,6 +1,5 @@
 'use client';
 
-import AuthService from "@/services/auth.service";
 import { App, Button, Divider, Layout, List, Typography } from "antd";
 import { User } from "@/services/user.service";
 import { CalendarOutlined, EditOutlined, UserOutlined, UserDeleteOutlined } from "@ant-design/icons";

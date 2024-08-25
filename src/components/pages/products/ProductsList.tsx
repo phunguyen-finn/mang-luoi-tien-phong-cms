@@ -47,7 +47,7 @@ export function ProductsList({ initData, initCursor, initHasMore }: ProductsList
     return (
         <Layout>
             <div style={contentStyle}>
-                <Link href="/products/create" style={{ width: 98 }}>
+                <Link href="/products/create" style={{ width: 121 }}>
                     <Button type='primary' style={{ position: 'absolute' }}>Tạo sản phẩm</Button>
                 </Link>
             </div>

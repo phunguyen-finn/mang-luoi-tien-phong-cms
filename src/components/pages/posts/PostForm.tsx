@@ -35,7 +35,7 @@ const uploadButton = (
     </button>
 );
 
-export function PostForm({ initialData, onSubmit }: { initialData?: Post, onSubmit: any }) {
+export function PostForm({ initialData, onSubmit, isAdmin }: { initialData?: Post, onSubmit: any, isAdmin: boolean }) {
     const [form] = Form.useForm();
     const [content, setContent] = useState('');
     const [previewOpen, setPreviewOpen] = useState(false);
@@ -125,7 +125,7 @@ export function PostForm({ initialData, onSubmit }: { initialData?: Post, onSubm
         </Form.Item>
         <Form.Item label="Trạng thái" name="status" rules={[{ required: true }]}>
             <Radio.Group>
-                <Radio.Button value={POST_STATUS.PUBLISHED}>Công khai</Radio.Button>
+                <Radio.Button value={POST_STATUS.PUBLISHED} disabled={!isAdmin}>Công khai</Radio.Button>
                 <Radio.Button value={POST_STATUS.DRAFT}>Nháp</Radio.Button>
                 <Radio.Button value={POST_STATUS.ARCHIVED}>Kho lưu trữ</Radio.Button>
             </Radio.Group>

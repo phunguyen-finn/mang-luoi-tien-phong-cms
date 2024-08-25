@@ -6,6 +6,7 @@ import Link from "next/link";
 import AccountEditForm from "./AccountEditForm";
 import { createAccount, editAccount } from "@/services/admin/session.service";
 import { User } from "@/services/user.service";
+import { useRouter } from "next/navigation";
 
 const layoutStyle = {
     justifyContent: "center",
@@ -16,12 +17,14 @@ const layoutStyle = {
 
 export function AccountPage({ user, current_user_email }: { user?: User, current_user_email: string }) {
     const { message } = App.useApp();
+    const router = useRouter();
 
     const handleCreate = (account: any) => {
         message.loading('Tạo tài khoản...', 0);
         createAccount(account.email, account.password, account.displayName, account.authority, current_user_email).then(() => {
             message.destroy();
             message.success('Tạo tài khoản thành công!', 5);
+            router.push('/accounts');
         }).catch((error) => {
             message.destroy();
             message.error('Tạo tài khoản thất bại: ' + error.message, 5);
@@ -33,6 +36,7 @@ export function AccountPage({ user, current_user_email }: { user?: User, current
         editAccount(account).then(() => {
             message.destroy();
             message.success('Tạo tài khoản thành công!', 5);
+            router.push('/accounts');
         }).catch((error) => {
             message.destroy();
             message.error('Tạo tài khoản thất bại: ' + error.message, 5);

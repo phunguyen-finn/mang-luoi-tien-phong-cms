@@ -15,7 +15,7 @@ export function CardItem({ item, handleDelete, handleEdit }: any) {
             okText="Xác nhận"
             cancelText="Huỷ"
         >
-            <DeleteOutlined key="delete" />,
+            <DeleteOutlined key="delete" />
         </Popconfirm>
     ];
 
