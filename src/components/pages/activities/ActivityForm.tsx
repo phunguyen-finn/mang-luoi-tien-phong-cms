@@ -85,9 +85,7 @@ export function ActivityForm({ initialData, onSubmit, categories, isAdmin }: { i
         labelCol={{ span: 5 }}
         labelAlign='left'
         style={{ width: 800 }}
-        onFinish={(val) => {
-            console.log(val)
-        }}
+        onFinish={onSubmit}
         initialValues={initialData}
     >
         <Form.Item
