@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AntdRegistry>
-          <NextTopLoader />
+          <NextTopLoader showSpinner={false} />
           <App>
             {children}
           </App>

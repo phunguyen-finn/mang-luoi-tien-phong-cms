@@ -16,6 +16,7 @@ import Button from "antd/es/button";
 import Image from "antd/es/image";
 import Divider from "antd/es/divider";
 import Space from "antd/es/space";
+import { Checkbox } from "antd";
 
 const uploadButton = (
     <button
@@ -84,7 +85,9 @@ export function ActivityForm({ initialData, onSubmit, categories, isAdmin }: { i
         labelCol={{ span: 5 }}
         labelAlign='left'
         style={{ width: 800 }}
-        onFinish={onSubmit}
+        onFinish={(val) => {
+            console.log(val)
+        }}
         initialValues={initialData}
     >
         <Form.Item
@@ -137,6 +140,14 @@ export function ActivityForm({ initialData, onSubmit, categories, isAdmin }: { i
                 }))}
                 rootClassName="capitalize"
             />
+        </Form.Item>
+        <Form.Item
+            label="Nổi bật"
+            name="isFeatured"
+            valuePropName="checked"
+            initialValue={initialData ? initialData.isFeatured : false}
+        >
+            <Checkbox />
         </Form.Item>
         <Form.Item
             name="thumbnailUrl"

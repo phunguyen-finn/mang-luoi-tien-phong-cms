@@ -14,6 +14,7 @@ import Select from "antd/es/select";
 import Upload from "antd/es/upload";
 import Button from "antd/es/button";
 import Image from "antd/es/image";
+import Checkbox from "antd/es/checkbox/Checkbox";
 
 const uploadButton = (
     <button
@@ -89,6 +90,14 @@ export function PostForm({ initialData, onSubmit, isAdmin }: { initialData?: Pos
                 <Select.Option value={POST_CATEGORY.OPINION}>Quan điểm</Select.Option>
                 <Select.Option value={POST_CATEGORY.RESEARCH}>Nghiên cứu</Select.Option>
             </Select>
+        </Form.Item>
+        <Form.Item
+            label="Nổi bật"
+            name="isFeatured"
+            valuePropName="checked"
+            initialValue={initialData ? initialData.isFeatured : false}
+        >
+            <Checkbox />
         </Form.Item>
         <Form.Item
             name="thumbnailUrl"
