@@ -13,6 +13,7 @@ import { createSession } from '@/services/admin/session.service';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { validateMessages } from '@/constants';
+import { useEffect } from 'react';
 
 
 const layoutStyle: React.CSSProperties = {
@@ -43,13 +44,17 @@ export default function LoginPage() {
     const { message } = App.useApp();
     const router = useRouter();
 
+    useEffect(() => {
+        return () => {
+            message.destroy();
+        }
+    }, [])
 
     const onFinish = async (values: any) => {
         message.loading('Đăng nhập...', 0);
         try {
             const user = await AuthService.login(values.username, values.password);
             await createSession(await user.user.getIdToken(), values.remember);
-            message.destroy();
             router.replace('/');
         } catch (error) {
             message.destroy();

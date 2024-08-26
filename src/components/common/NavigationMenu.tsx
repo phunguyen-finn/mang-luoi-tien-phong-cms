@@ -10,6 +10,7 @@ import { deleteSession } from "@/services/admin/session.service";
 import App from "antd/es/app";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export const MENU_ITEM_KEYS = {
     STATIC: 'static',
@@ -50,6 +51,12 @@ export default function NavigationMenu({ user }: any) {
     const router = useRouter();
     const { message } = App.useApp();
 
+    useEffect(() => {
+        return () => {
+            message.destroy();
+        }
+    }, [])
+
 
     const MENU_ITEMS: any = [
         {
@@ -88,7 +95,6 @@ export default function NavigationMenu({ user }: any) {
                 message.loading('Đăng xuất..', 0);
                 await deleteSession();
                 await AuthService.logout();
-                message.destroy();
                 router.replace('/login');
             }}>Đăng xuất</div>,
             icon: <LogoutOutlined />,
