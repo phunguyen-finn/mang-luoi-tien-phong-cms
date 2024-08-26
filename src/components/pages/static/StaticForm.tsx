@@ -60,6 +60,13 @@ export function StaticForm({ initialData, isAdmin }: { initialData: Static, isAd
         return undefined;
     }
 
+    const normFiles = (e: any) => {
+        const urls = e.fileList.map((file: any) => {
+            return file.response;
+        })
+        return urls.filter((url: string) => url);
+    }
+
     const onSubmit = (values: any) => {
         message.loading('Đang cập nhật...', 0);
         StaticService.updateStatic(values).then(() => {
@@ -85,7 +92,7 @@ export function StaticForm({ initialData, isAdmin }: { initialData: Static, isAd
             name="partnerLogoUrls"
             label="Logo đối tác"
             rules={[{ required: true }]}
-            normalize={normFile}
+            normalize={normFiles}
         >
             <Upload
                 name="logo"
