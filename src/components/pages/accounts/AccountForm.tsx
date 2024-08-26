@@ -45,7 +45,7 @@ export function AccountForm({ onSubmit }: { onSubmit: any }) {
         </Form.Item>
         <Form.Item style={{ display: "flex", width: 800, justifyContent: "end" }}>
             <Button type='primary' htmlType='submit'>
-                Confirm
+                Xác nhận
             </Button>
         </Form.Item>
     </Form>;
