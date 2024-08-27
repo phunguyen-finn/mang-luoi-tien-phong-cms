@@ -4,6 +4,7 @@ import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import App from 'antd/es/app';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
             {children}
           </App>
         </AntdRegistry>
+        <SpeedInsights />
       </body>
     </html>
   );

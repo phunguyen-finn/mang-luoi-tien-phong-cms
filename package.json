@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.1",
+    "@vercel/speed-insights": "^1.0.12",
     "antd": "^5.20.2",
     "firebase": "^10.13.0",
     "firebase-admin": "^12.4.0",
