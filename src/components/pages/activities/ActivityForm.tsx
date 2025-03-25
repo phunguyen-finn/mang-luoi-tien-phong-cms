@@ -1,22 +1,24 @@
 'use client';
 
-import { Activity, ACTIVITY_STATUS } from "@/services/activity.service";
-import { PlusOutlined } from "@ant-design/icons";
+import { ACTIVITY_STATUS, Activity } from "@/services/activity.service";
 import { useRef, useState } from "react";
-import RichTextEditor from "@/components/common/RichTextEditor";
-import { validateMessages } from "@/constants/index";
-import StorageService from "@/services/storage.service";
-import { makeThumbnail } from "@/utils/thumbnail";
-import Form from "antd/es/form";
-import Input from "antd/es/input";
-import Radio from "antd/es/radio";
-import Select from "antd/es/select";
-import Upload from "antd/es/upload";
+
 import Button from "antd/es/button";
-import Image from "antd/es/image";
-import Divider from "antd/es/divider";
-import Space from "antd/es/space";
 import { Checkbox } from "antd";
+import Divider from "antd/es/divider";
+import { Fira_Sans } from "next/font/google";
+import Form from "antd/es/form";
+import Image from "antd/es/image";
+import Input from "antd/es/input";
+import { PlusOutlined } from "@ant-design/icons";
+import Radio from "antd/es/radio";
+import RichTextEditor from "@/components/common/RichTextEditor";
+import Select from "antd/es/select";
+import Space from "antd/es/space";
+import StorageService from "@/services/storage.service";
+import Upload from "antd/es/upload";
+import { makeThumbnail } from "@/utils/thumbnail";
+import { validateMessages } from "@/constants/index";
 
 const uploadButton = (
     <button
@@ -37,6 +39,11 @@ const uploadButton = (
         </div>
     </button>
 );
+
+const inter = Fira_Sans({
+    weight: ['400', '500', '600', '700'],
+    subsets: ["latin", "vietnamese"],
+});
 
 export function ActivityForm({ initialData, onSubmit, categories, isAdmin }: { initialData?: Activity, onSubmit: any, categories: string[], isAdmin: boolean }) {
     const [form] = Form.useForm();
@@ -192,6 +199,16 @@ export function ActivityForm({ initialData, onSubmit, categories, isAdmin }: { i
                 Xác nhận
             </Button>
         </Form.Item>
+        <Divider />
+        <div className="flex flex-col items-center mb-10">
+            <h1 className="text-base text-black mb-5">Xem trước</h1>
+            <div className="w-11/12 md:w-8/12 lg:w-[700px] block p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+                <h1 className="text-xl md:text-4xl text-black font-bold">{form.getFieldValue("title")}</h1>
+                <p className="text-sm md:text-sm text-black text-gray-600 italic mb-5 mt-2">{form.getFieldValue("preview")}</p>
+                <Divider />
+                <div className={`${inter.className} text-base`} dangerouslySetInnerHTML={{ __html: content }} />
+            </div>
+        </div>
         {previewImage && (
             <Image
                 wrapperStyle={{
