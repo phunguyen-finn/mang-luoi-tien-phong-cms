@@ -1,16 +1,17 @@
 'use client';
 
-import { EditOutlined, LogoutOutlined, ShopOutlined, GoogleOutlined, CodeOutlined, GithubOutlined, FolderOpenOutlined, CopyOutlined, FormatPainterOutlined, NodeExpandOutlined, CameraOutlined, UserOutlined, GlobalOutlined } from "@ant-design/icons";
-import { usePathname } from 'next/navigation';
-import Typography from "antd/es/typography/Typography";
-import Menu from "antd/es/menu";
-import { useRouter } from "next/navigation";
-import AuthService from "@/services/auth.service";
-import { deleteSession } from "@/services/admin/session.service";
+import { CameraOutlined, CodeOutlined, CopyOutlined, EditOutlined, FolderOpenOutlined, FormatPainterOutlined, GithubOutlined, GlobalOutlined, GoogleOutlined, LogoutOutlined, NodeExpandOutlined, ShopOutlined, UserOutlined } from "@ant-design/icons";
+
 import App from "antd/es/app";
+import AuthService from "@/services/auth.service";
 import Image from "next/image";
 import Link from "next/link";
+import Menu from "antd/es/menu";
+import Typography from "antd/es/typography/Typography";
+import { deleteSession } from "@/services/admin/session.service";
 import { useEffect } from "react";
+import { usePathname } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export const MENU_ITEM_KEYS = {
     STATIC: 'static',
@@ -119,7 +120,7 @@ export default function NavigationMenu({ user }: any) {
                 {
                     key: MENU_ITEM_KEYS.GITHUB,
                     icon: <GithubOutlined />,
-                    label: <a target="_blank" href="https://github.com/nnphongphu/mang-luoi-tien-phong-cms">Mã nguồn</a>
+                    label: <a target="_blank" href="https://github.com/nnphongphu/mang-luoi-tien-phong-core">Mã nguồn</a>
                 },
                 {
                     key: MENU_ITEM_KEYS.GOOGLE_ANALYTICS,
